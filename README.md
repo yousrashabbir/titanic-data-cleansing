@@ -1,6 +1,8 @@
 # Titanic Dataset – Data Cleansing with Python
 
-A complete, reproducible data-cleansing project on the Kaggle **Titanic – Machine Learning from Disaster** dataset, written in Python with pandas.
+A complete, reproducible data-cleansing project on the Kaggle **Titanic – Machine Learning from Disaster** dataset, written entirely in Python (pandas, Matplotlib, Streamlit), with a visual dashboard of every cleaning step.
+
+![Dashboard](images/dashboard_top.png)
 
 ## Dataset
 
@@ -34,10 +36,17 @@ A complete, reproducible data-cleansing project on the Kaggle **Titanic – Mach
 
 | Before | After |
 |---|---|
-| ![before](images/missing_bar_before.png) | ![after](images/missing_bar_after.png) |
+| ![before](images/dashboard/rows_before.png) | ![after](images/dashboard/rows_after.png) |
 
-![rows before](images/rows_missing_before.png)
-![rows after](images/rows_missing_after.png)
+## Visual dashboard (Python)
+
+| File | What it is |
+|---|---|
+| `dashboard/titanic_cleansing_dashboard.png` / `.pdf` | Full dashboard – 20 panels in one page |
+| `images/dashboard/*.png` | Each panel on its own |
+| `app.py` | Interactive Streamlit dashboard (11 sections, before/after switch, CSV download) |
+
+Panels are drawn with Matplotlib in `src/visuals.py`, from metrics computed in `src/dashboard_data.py`.
 
 ## Project structure
 
@@ -48,8 +57,13 @@ titanic-data-cleansing/
 │   └── cleaned/titanic_cleaned.csv   output of the pipeline
 ├── src/
 │   ├── data_cleansing.py             the cleaning pipeline
-│   └── make_snapshots.py             builds the report images
-├── images/                           charts, code and output snapshots
+│   ├── dashboard_data.py             before / after metrics of every step
+│   ├── visuals.py                    dashboard panels (Matplotlib)
+│   ├── build_dashboard.py            full dashboard image + PDF
+│   └── make_snapshots.py             code snapshots for the report
+├── dashboard/                        finished dashboard (PNG, PDF)
+├── images/                           dashboard panels, charts, code snapshots
+├── app.py                            interactive Streamlit dashboard
 ├── report/Data_Cleansing_Report.docx full written report
 ├── requirements.txt
 └── README.md
@@ -62,9 +76,10 @@ git clone https://github.com/YOUR-USERNAME/titanic-data-cleansing.git
 cd titanic-data-cleansing
 pip install -r requirements.txt
 python src/data_cleansing.py      # cleans the data -> data/cleaned/
-python src/make_snapshots.py      # optional: rebuilds the report images
+python src/build_dashboard.py     # builds the dashboard -> dashboard/
+streamlit run app.py              # interactive dashboard in the browser
 ```
 
 ## Report
 
-The full formal report, with a code snapshot and console output for every step, is in [`report/Data_Cleansing_Report.docx`](report/Data_Cleansing_Report.docx).
+The full formal report, with a code snapshot and a dashboard panel for every step, is in [`report/Data_Cleansing_Report.docx`](report/Data_Cleansing_Report.docx).
